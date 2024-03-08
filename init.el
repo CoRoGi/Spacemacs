@@ -735,7 +735,11 @@ before packages are loaded."
   (spacemacs/toggle-fringe-off)
   (spacemacs/set-leader-keys
     "aordct" 'org-roam-dailies-capture-today
-    "oo" 'delete-other-windows)
+    "oo" 'delete-other-windows
+    "gC" 'magit-commit
+    "gp" 'magit-push
+    "gu" 'magit-fetch
+    "gP" 'magit-pull)
   (use-package org-excalidraw
     :config (setq org-excalidraw-directory "~/Personal/Org/excalidraw/"))
   (use-package org-fragtog)
