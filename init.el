@@ -645,6 +645,22 @@ before packages are loaded."
   (org-roam-db-autosync-enable)
   (spacemacs/enable-transparency)
   (setq org-agenda-span 'day)
+  (setq org-agenda-custom-commands
+        (quote (("N" "Notes" tags "NOTE"
+                 ((org-agenda-overriding-header "Notes")
+                  (org-tags-match-list-sublevels t)))
+                ("h" "Habits" tags-todo "STYLE=\"habit\""
+                 ((org-agenda-overriding-header "Habits")
+                  (org-agenda-sorting-strategy
+                   '(todo-state-down effort-up category-keep))))
+                (" " "Agenda"
+                 ((agenda "" nil)
+                (tags-todo "-CANCELLED/!NEXT"
+                           ((org-agenda-overriding-header (concat "Project Next Tasks"))
+                            (org-tags-match-list-sublevels t)
+                            (org-agenda-sorting-strategy
+                             '(todo-state-down effort-up category-keep))))
+                 nil)))))
   (with-eval-after-load 'org
   (setq org-roam-dailies-directory "~/Personal/Org/daily/")
   (add-hook 'after-init-hook 'org-roam-mode)
@@ -676,8 +692,8 @@ before packages are loaded."
       ("d" "daily")
        ( "dl" "logs" plain "- %^U %?\n%i\n"
        :prepend nil
-       :target (file+head+olp "%<%Y-%m-%d>.org"
-                              "#+title: %<%Y-%m-%d>\n* Journal\n* TODOs\n"
+       :target (file+head+olp "logs.org"
+                              "#+title: Logs"
                               ("Logs")))
        ( "dh" "habits" plain (file "~/Personal/Org/Templates/daily_template.org")
        :prepend nil
@@ -689,6 +705,11 @@ before packages are loaded."
         :target (file+head+olp "%<%Y-%m-%d>.org"
                                "#+title: %<%Y-%m-%d>"
                                ("Journal")))
+       ("ds" "schedule" plain
+        "%?" :prepend nil
+        :target (file+head+olp "%<%Y-%m-%d>.org"
+                               "#+title: %<%Y-%m-%d>"
+                               ("Schedule")))
        ("dt" "todo" plain
         "** TODO %?" :prepend nil
         :target (file+head+olp "%<%Y-%m-%d>.org"
