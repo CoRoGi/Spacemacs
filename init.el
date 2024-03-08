@@ -736,6 +736,7 @@ before packages are loaded."
   (spacemacs/set-leader-keys
     "aordct" 'org-roam-dailies-capture-today
     "oo" 'delete-other-windows
+    "oc" 'org-toggle-checkbox
     "gC" 'magit-commit
     "gp" 'magit-push
     "gu" 'magit-fetch
